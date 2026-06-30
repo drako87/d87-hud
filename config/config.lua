@@ -4,7 +4,7 @@ Config = {}
 Config.Framework = 'auto'      -- Opciones: 'auto', 'qbox', 'qb-core', 'esx'
 Config.Locale = 'es'           -- Opciones: 'es', 'en', 'fr', 'de'
 
-Config.GitHubRepo = 'https://github.com'
+Config.GitHubRepo = 'https://github.com/drako87/d87-hud'
 
 -- CONFIGURACIÓN DEL HUD DE CONSTANTES
 Config.Size = 1.05              
