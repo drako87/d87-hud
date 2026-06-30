@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    user-select: none;
+}
+
+#d87-hud-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+/* 1. COLUMNA VERTICAL DE CONSTANTES VITALES */
+#d87-hud {
+    position: absolute;
+    display: flex;
+    flex-direction: column; 
+    gap: 3px; 
+    background: transparent;
+    transform-origin: bottom left;
+}
+
+/* 2. BRÚJULA Y HORA TRANSPARENTE (ARRIBA DEL MAPA) */
+#d87-compass-box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform-origin: bottom left;
+}
+
+/* 3. RECUADRO AISLADO DE WAYPOINT (DENTRO DEL MARCO DEL MINIMAPA) */
+#stat-waypoint {
+    position: absolute;
+    transform-origin: bottom left;
+}
+
+/* 4. MICRÓFONO PMA-VOICE (CORREGIDO: Esquina inferior derecha absoluta de la pantalla) */
+#stat-voice {
+    position: absolute;
+    display: flex;
+    transform-origin: bottom right; /* Pivota desde la derecha */
+}
+
+/* FORMATO UNIFICADO DE RECTÁNGULOS SIMÉTRICOS DE 58PX */
+.hud-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 4px; 
+    width: 58px; 
+    height: 19px; 
+    padding: 0px 8px; 
+    border-radius: 4px; 
+    background: rgba(16, 18, 27, 0.96) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+
+.hud-icon-text { font-size: 0.72rem; font-weight: 800; color: #a78bfa; letter-spacing: 0.1px; line-height: 1; width: 14px; }
+.hud-icon { font-size: 0.8rem; display: flex; align-items: center; justify-content: center; line-height: 1; width: 14px; }
+.hud-value { font-size: 0.82rem; font-weight: 600; color: rgba(255, 255, 255, 0.78) !important; text-shadow: none !important; line-height: 1; letter-spacing: -0.2px; text-align: left; flex: 1; }
+
+/* BORDES DE COLOR SÓLIDO DE RELIEVE */
+.id-bg       { border-left: 3px solid #6d28d9 !important; }  
+.voice-bg    { border-left: 3px solid #7c3aed !important; } 
+.oxygen-bg   { border-left: 3px solid #ec4899 !important; } 
+.health-bg   { border-left: 3px solid #ef4444 !important; }  
+.armor-bg    { border-left: 3px solid #3b82f6 !important; }  
+.hunger-bg   { border-left: 3px solid #f59e0b !important; } 
+.thirst-bg   { border-left: 3px solid #06b6d4 !important; }  
+.stress-bg   { border-left: 3px solid #8b5cf6 !important; }  
+.stamina-bg  { border-left: 3px solid #10b981 !important; }  
+.sleep-bg    { border-left: 3px solid #facc15 !important; }  
+.waypoint-bg { border-left: 3px solid #f43f5e !important; }
+
+/* FORMATO TRANSPARENTE DE LA BRÚJULA Y EL RELOJ */
+.compass-row { font-size: 0.85rem; font-weight: 800; color: #ffffff; display: flex; gap: 6px; align-items: center; text-shadow: 1px 1px 2px #000; }
+#val-compass { color: #a78bfa; } 
+.compass-divider { color: rgba(255,255,255,0.2); }
+
+#val-street { 
+    font-size: 0.58rem; 
+    font-weight: 700; 
+    color: rgba(255, 255, 255, 0.45); 
+    letter-spacing: 1px; 
+    text-transform: uppercase; 
+    text-shadow: 1px 1px 1px #000; 
+    margin-top: 3px; 
+    padding-left: 0px; 
+}
+
+.voice-talking-active { background-color: #22c55e !important; filter: drop-shadow(0 0 4px #22c55e); }
+
+/* INTERFAZ FINANCIERO Y LOGOTIPO */
+#d87-finance {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    gap: 5px;
+    background: transparent;
+    transform-origin: top right;
+}
+
+#d87-logo { width: 100%; display: flex; justify-content: flex-end; margin-bottom: 2px; }
+#d87-logo img { max-width: 90px; height: auto; filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5)); }
+
+.fin-box { display: flex; align-items: center; background: rgba(16, 18, 27, 0.96) !important; border: 1px solid rgba(255, 255, 255, 0.06); padding: 3px 10px; border-radius: 6px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); font-size: 0.78rem; font-weight: 700; color: #ffffff; min-width: 95px; justify-content: flex-start; }
+.fin-icon { font-size: 0.85rem; margin-right: 8px; display: flex; align-items: center; }
+
+.cash-border { border-left: 3px solid #10b981 !important; color: #4ade80; } 
+.bank-border { border-left: 3px solid #3b82f6 !important; color: #60a5fa; } 
+.job-border  { border-left: 3px solid #a855f7 !important; color: #e9d5ff; font-size: 0.7rem !important; } 
+
+.blink-hud-alert { animation: hudBoxBlink 1s infinite steps(2, start); }
+@keyframes hudBoxBlink { 0%, 100% { border-left-color: #b91c1c !important; background-color: rgba(185, 28, 28, 0.4) !important; } 50% { opacity: 0.5; } }

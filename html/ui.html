@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="ui.css">
+</head>
+<body>
+    <!-- CONTENEDOR MAESTRO GLOBAL (Evita fugas visuales en pantallas de carga) -->
+    <div id="d87-hud-wrapper" style="display: none;">
+
+        <!-- PANEL DE FINANZAS Y LOGOTIPO (ARRIBA A LA DERECHA) -->
+        <div id="d87-finance">
+            <div id="d87-logo">
+                <img src="img/logo.png" alt="Logo">
+            </div>
+            <div class="fin-box cash-border" id="fin-cash">
+                <span class="fin-icon">💵</span>
+                <span id="val-cash">$0</span>
+            </div>
+            <div class="fin-box bank-border" id="fin-bank">
+                <span class="fin-icon">💳</span>
+                <span id="val-bank">$0</span>
+            </div>
+            <div class="fin-box job-border" id="fin-job">
+                <span class="fin-icon">💼</span>
+                <span id="val-job">...</span>
+            </div>
+        </div>
+
+        <!-- MÓDULO BRÚJULA Y RELOJ TRANSPARENTE (ARRIBA Y FUERA DEL MINIMAPA) -->
+        <div id="d87-compass-box">
+            <div class="compass-row">
+                <span id="val-time">00:00</span>
+                <span class="compass-divider">|</span>
+                <span id="val-compass">N</span>
+            </div>
+            <div id="val-street">...</div>
+        </div>
+
+        <!-- CAJA DE RUTA WAYPOINT (DENTRO DEL MARCO SUPERIOR DERECHO DEL MINIMAPA) -->
+        <div class="hud-box waypoint-bg" id="stat-waypoint" style="display: none;">
+            <span class="hud-icon">📍</span>
+            <span class="hud-value" id="val-waypoint">0M</span>
+        </div>
+
+        <!-- TESTIGO DE MICRÓFONO PMA-VOICE (ABAJO A LA IZQUIERDA DEL MINIMAPA) -->
+        <div class="hud-box voice-bg" id="stat-voice">
+            <span class="hud-icon" id="icon-voice">🎙️</span>
+            <span class="hud-value" id="val-voice">0M</span>
+        </div>
+
+        <!-- HUD DE CONSTANTES VERTICAL (BAJADO Y CENTRADO AL FLANCO DERECHO DEL MINIMAPA) -->
+        <div id="d87-hud">
+            <div class="hud-box id-bg" id="stat-id">
+                <span class="hud-icon-text">ID</span>
+                <span class="hud-value" id="val-id">0</span>
+            </div>
+            <!-- Oxígeno de Buceo (Aparece solo bajo el agua) -->
+            <div class="hud-box oxygen-bg" id="stat-oxygen" style="display: none;">
+                <span class="hud-icon">🤿</span>
+                <span class="hud-value" id="val-oxygen">100</span>
+            </div>
+            <div class="hud-box health-bg" id="stat-health">
+                <span class="hud-icon">💔</span>
+                <span class="hud-value" id="val-health">0</span>
+            </div>
+            <div class="hud-box armor-bg" id="stat-armor">
+                <span class="hud-icon">🛡️</span>
+                <span class="hud-value" id="val-armor">0</span>
+            </div>
+            <div class="hud-box hunger-bg" id="stat-hunger">
+                <span class="hud-icon">🍔</span>
+                <span class="hud-value" id="val-hunger">0</span>
+            </div>
+            <div class="hud-box thirst-bg" id="stat-thirst">
+                <span class="hud-icon">🥤</span>
+                <span class="hud-value" id="val-thirst">0</span>
+            </div>
+            <div class="hud-box stress-bg" id="stat-stress">
+                <span class="hud-icon">🧠</span>
+                <span class="hud-value" id="val-stress">0</span>
+            </div>
+            <div class="hud-box stamina-bg" id="stat-stamina">
+                <span class="hud-icon">🫁</span>
+                <span class="hud-value" id="val-stamina">0</span>
+            </div>
+            <div class="hud-box sleep-bg" id="stat-sleep">
+                <span class="hud-icon">🛌</span>
+                <span class="hud-value" id="val-sleep">0</span>
+            </div>
+        </div>
+
+    </div>
+    <script src="ui.js"></script>
+</body>
+</html>
