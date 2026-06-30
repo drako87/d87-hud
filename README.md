@@ -44,7 +44,7 @@ Config = {}
 Config.Framework = 'auto'       -- 'auto', 'qbox', 'qb-core', 'esx'
 
 -- URL de tu repositorio público en GitHub para el control de versiones
-Config.GitHubRepo = 'https://github.com'
+Config.GitHubRepo = 'https://github.com/drako87/d87-hud'
 
 -- CONFIGURACIÓN VISUAL
 Config.Size = 1.0               -- Escala del HUD (0.8 = Más chico, 1.2 = Más grande)
