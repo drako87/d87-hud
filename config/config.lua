@@ -19,7 +19,7 @@ Config.StatsLeft = 16.5
 Config.CompassBottom = 220     
 Config.CompassLeft = 2.2       
 
--- 📍 CAJA DE RUTA WAYPOINT (MODIFICADO: Subida a 188 para encajar más arriba)
+-- 📍 CAJA DE RUTA WAYPOINT
 Config.WaypointBottom = 188    
 Config.WaypointLeft = 12.3     
 
@@ -60,3 +60,24 @@ Config.StaminaDrainSprint = 1.5
 Config.StaminaRegenRest = 2.0   
 Config.SleepDrainMinutes = 45   
 Config.SleepEffectBlur = true   
+
+-- 🔊 ALERTA SONORA (se reproduce cuando una constante entra en zona de alerta)
+Config.AlertSound = true       
+Config.AlertSoundVolume = 0.4  -- Rango de 0.0 (silencio) a 1.0 (máximo)
+Config.AlertSoundCooldown = 6  -- Segundos entre pitidos mientras la alerta sigue activa
+
+-- 🗺️ ZONA Y UNIDADES DE DISTANCIA
+Config.ShowZone = true         -- Muestra el nombre de la zona junto a la calle (ej: "Calle Grove, Davis")
+Config.DistanceUnit = 'metric' -- 'metric' (metros/km) o 'imperial' (pies/millas)
+
+-- 🎨 PERSONALIZACIÓN VISUAL
+Config.Theme = 'purple'        -- 'purple', 'blue', 'red'
+Config.CompactMode = false     -- Cajas más pequeñas, ideal para resoluciones bajas o streamers
+
+-- ✨ COMPORTAMIENTO INTELIGENTE
+Config.SmartFadeOut = false     -- Oculta hambre/sed cuando el personaje está saciado (>95%)
+Config.AutoHideArmor = false    -- Oculta por completo la caja de armadura si no llevas chaleco (0 de armadura)
+
+-- 🧩 MENÚ DE AJUSTES EN VIVO
+Config.MenuCommand = 'hudmenu' -- Comando para abrir/cerrar el menú de personalización (/hudmenu)
+Config.SaveSettingsPerClient = true -- Guarda los ajustes del menú en el PC del jugador (KVP) entre sesiones
