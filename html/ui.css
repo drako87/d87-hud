@@ -6,7 +6,13 @@ body {
     user-select: none;
 }
 
+/* 🎨 VARIABLES DE TEMA — el color "acento" cambia con el tema, los colores funcionales
+   de cada estadística (salud, hambre, sed, etc.) se mantienen fijos para no romper
+   la asociación visual aprendida por el jugador. */
 #d87-hud-wrapper {
+    --accent: #a78bfa;
+    --accent-border: #6d28d9;
+
     position: absolute;
     width: 100%;
     height: 100%;
@@ -14,6 +20,16 @@ body {
     left: 0;
     background: transparent;
     pointer-events: none;
+}
+
+#d87-hud-wrapper.theme-blue {
+    --accent: #60a5fa;
+    --accent-border: #2563eb;
+}
+
+#d87-hud-wrapper.theme-red {
+    --accent: #f87171;
+    --accent-border: #b91c1c;
 }
 
 /* 1. COLUMNA VERTICAL DE CONSTANTES VITALES */
@@ -44,7 +60,7 @@ body {
     transform-origin: bottom left;
 }
 
-/* 4. MICRÓFONO PMA-VOICE (CORREGIDO: Esquina inferior derecha absoluta de la pantalla) */
+/* 4. MICRÓFONO PMA-VOICE (Esquina inferior derecha absoluta de la pantalla) */
 #stat-voice {
     position: absolute;
     display: flex;
@@ -65,14 +81,22 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.05); 
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.6s ease, width 0.2s ease, height 0.2s ease, padding 0.2s ease;
 }
 
-.hud-icon-text { font-size: 0.72rem; font-weight: 800; color: #a78bfa; letter-spacing: 0.1px; line-height: 1; width: 14px; }
+/* ✨ SMART FADE OUT — aplicado por JS cuando una necesidad supera el 95% */
+.hud-box.hud-faded {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hud-icon-text { font-size: 0.72rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1px; line-height: 1; width: 14px; }
 .hud-icon { font-size: 0.8rem; display: flex; align-items: center; justify-content: center; line-height: 1; width: 14px; }
 .hud-value { font-size: 0.82rem; font-weight: 600; color: rgba(255, 255, 255, 0.78) !important; text-shadow: none !important; line-height: 1; letter-spacing: -0.2px; text-align: left; flex: 1; }
 
-/* BORDES DE COLOR SÓLIDO DE RELIEVE */
-.id-bg       { border-left: 3px solid #6d28d9 !important; }  
+/* BORDES DE COLOR SÓLIDO DE RELIEVE (colores funcionales fijos, no cambian con el tema) */
+.id-bg       { border-left: 3px solid var(--accent-border) !important; }  
 .voice-bg    { border-left: 3px solid #7c3aed !important; } 
 .oxygen-bg   { border-left: 3px solid #ec4899 !important; } 
 .health-bg   { border-left: 3px solid #ef4444 !important; }  
@@ -86,7 +110,7 @@ body {
 
 /* FORMATO TRANSPARENTE DE LA BRÚJULA Y EL RELOJ */
 .compass-row { font-size: 0.85rem; font-weight: 800; color: #ffffff; display: flex; gap: 6px; align-items: center; text-shadow: 1px 1px 2px #000; }
-#val-compass { color: #a78bfa; } 
+#val-compass { color: var(--accent); } 
 .compass-divider { color: rgba(255,255,255,0.2); }
 
 #val-street { 
@@ -98,6 +122,17 @@ body {
     text-shadow: 1px 1px 1px #000; 
     margin-top: 3px; 
     padding-left: 0px; 
+}
+
+/* 🗺️ Nombre de zona, línea secundaria bajo la calle */
+#val-zone {
+    font-size: 0.56rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.32);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    margin-top: 1px;
 }
 
 .voice-talking-active { background-color: #22c55e !important; filter: drop-shadow(0 0 4px #22c55e); }
@@ -121,7 +156,218 @@ body {
 
 .cash-border { border-left: 3px solid #10b981 !important; color: #4ade80; } 
 .bank-border { border-left: 3px solid #3b82f6 !important; color: #60a5fa; } 
-.job-border  { border-left: 3px solid #a855f7 !important; color: #e9d5ff; font-size: 0.7rem !important; } 
+.job-border  { border-left: 3px solid var(--accent-border) !important; color: var(--accent); font-size: 0.7rem !important; } 
 
 .blink-hud-alert { animation: hudBoxBlink 1s infinite steps(2, start); }
 @keyframes hudBoxBlink { 0%, 100% { border-left-color: #b91c1c !important; background-color: rgba(185, 28, 28, 0.4) !important; } 50% { opacity: 0.5; } }
+
+/* 📦 MODO COMPACTO — cajas y tipografía reducidas para resoluciones bajas / streaming */
+#d87-hud-wrapper.compact-mode .hud-box {
+    width: 46px;
+    height: 15px;
+    padding: 0px 6px;
+    gap: 2px;
+}
+#d87-hud-wrapper.compact-mode .hud-icon,
+#d87-hud-wrapper.compact-mode .hud-icon-text {
+    font-size: 0.62rem;
+    width: 11px;
+}
+#d87-hud-wrapper.compact-mode .hud-value {
+    font-size: 0.68rem;
+}
+#d87-hud-wrapper.compact-mode #d87-hud {
+    gap: 2px;
+}
+#d87-hud-wrapper.compact-mode .fin-box {
+    padding: 2px 8px;
+    font-size: 0.68rem;
+    min-width: 80px;
+}
+
+/* ======================================================
+   🧩 MENÚ DE AJUSTES EN VIVO (/hudmenu)
+   ====================================================== */
+#d87-menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    z-index: 999;
+}
+
+#d87-menu {
+    width: 460px;
+    max-height: 80vh;
+    background: rgba(16, 18, 27, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #fff;
+    overflow: hidden;
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.menu-header span {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--accent, #a78bfa);
+    letter-spacing: 0.3px;
+}
+
+#menu-close {
+    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    color: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+#menu-close:hover { background: rgba(239, 68, 68, 0.6); }
+
+.menu-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.menu-tab.active {
+    color: #fff;
+    border-bottom: 2px solid var(--accent, #a78bfa);
+}
+
+.menu-body {
+    padding: 14px 16px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.menu-row label {
+    flex: 0 0 44%;
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.menu-row input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent, #a78bfa);
+}
+
+.menu-row select {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.74rem;
+}
+
+.menu-row-toggle input[type="checkbox"] {
+    width: 34px;
+    height: 18px;
+    accent-color: var(--accent, #a78bfa);
+    cursor: pointer;
+}
+
+.menu-val {
+    flex: 0 0 40px;
+    text-align: right;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.menu-divider {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent, #a78bfa);
+    margin: 16px 0 8px 0;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.menu-divider:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+.menu-toggle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+}
+
+.menu-toggle-grid .menu-row {
+    margin-bottom: 0;
+}
+.menu-toggle-grid .menu-row label { flex: 1; }
+
+.menu-footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.menu-footer button {
+    flex: 1;
+    padding: 9px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.76rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#menu-reset {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+#menu-reset:hover { background: rgba(255, 255, 255, 0.15); }
+
+#menu-save {
+    background: var(--accent, #a78bfa);
+    color: #10121b;
+}
+#menu-save:hover { filter: brightness(1.1); }
