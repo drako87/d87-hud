@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'gta5'
 
 author 'Drako87/Dracatt'
-description 'D87 HUD - Sistema modular de constantes y finanzas con soporte multi-idioma'
-version '1.0.0'
+description 'D87 HUD - Sistema modular de constantes y finanzas con soporte multi-idioma, menu de ajustes en vivo y temas de color'
+version '1.1.0'
 
 ui_page 'html/ui.html'
 
