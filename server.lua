@@ -43,17 +43,14 @@ local function UpdatePlayerAccounts(source)
         end
     end
 
-    -- Si el framework no ha cargado el trabajo aún, el cliente inyectará el string traducido por defecto
     TriggerClientEvent('d87-hud:client:updateAccounts', source, cash, bank, jobLabel, gradeLabel)
 end
 
--- Escuchador reactivo: Atiende las solicitudes de actualización cuando el cliente hace login o spawnea
 RegisterNetEvent('d87-hud:server:requestUpdate', function()
     local src = source
     UpdatePlayerAccounts(src)
 end)
 
--- Escuchadores del ecosistema Qbox/QB-Core para actualizar saldos de forma reactiva instantánea
 RegisterNetEvent('qbx_core:server:onMoneyUpdate', function(playerData)
     if playerData and playerData.source then UpdatePlayerAccounts(playerData.source) end
 end)
@@ -70,6 +67,5 @@ RegisterNetEvent('QBCore:Server:OnJobUpdate', function(source)
     UpdatePlayerAccounts(source)
 end)
 
--- Escuchadores del ecosistema ESX para actualizaciones financieras reactivas en tiempo real
 RegisterNetEvent('esx:setAccountMoney', function(source) UpdatePlayerAccounts(source) end)
 RegisterNetEvent('esx:setJob', function(source) UpdatePlayerAccounts(source) end)
